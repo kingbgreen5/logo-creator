@@ -1,9 +1,9 @@
 const Shape = require('./lib/shapes');
 const inquirer = require('inquirer');
 const fs = require ('fs')
-const Rectangle = require ('./lib/shapes')
-
-
+const Rectangle = require('./lib/shapes')
+const Circle = require('./lib/shapes')
+const Triangle = require('./lib/shapes')
 
 // TODO: Create an array of questions for user input
 const questions = ['Enter up to three characters for logo text.','Please enter text color keyword or hex value', 'Enter desired logo shape ', 'Enter shape color keyword'];
@@ -42,44 +42,39 @@ function init() {
           
     ])
     .then((response) =>{ // user answers stored in response
-      console.log("responses: " + response);
-      // writeToFile('README.md', response)
 
+      writeToFile('./dir/logo.svg', response)
     });
   
 }
 
-// Function call to initialize app
-// {/* <rect x="100" y="50" width="100px" height="100px"
-// fill=""/>
-// <text x="135" y="100" fill="white">BTK</text>
-// </svg> 
-
-
-
-
-const rectSVG = `<rect x="100" y="50" width="100px" height="100px" fill=""/>` ;
-const rectText = `<text x="135" y="100" fill="white">BTK</text>
-</svg>`;
-        
-
-
 
 
 function writeToFile(fileName, data) {
+
+  console.log("Shapetype: " + data.shapetype)
+
  if (data.shapetype =='Rectangle'){
-  const rectangle = new Rectangle('<svg viewBox ="0 0 300 200">',rectSVG,rectText)
-  console.log(rectangle)
-  var data = `${rectangle.window}${rectangle.text}`    
-}
+  const rectSVG = `<rect x="100" y="50" width="100px" height="100px" fill="${data.shapecolor}"/>
+  <text x="135" y="100" fill="${data.textcolor}">${data.text}</text></svg>` ;
+  const rectangle = new Rectangle('<svg viewBox ="0 0 300 200">', rectSVG)
+  var data = `${rectangle.window}${rectangle.text}`
+  console.log("DATA: " +data)    
 
- if (data.shapetype=='Circle'){}
+}else if (data.shapetype=='Circle'){
+  const circleSVG = `<circle cx="150" cy="100" r="40" fill="${data.shapecolor}"/>
+  <text x="135" y="100" fill="${data.textcolor}">${data.text}</text></svg>` ;
+  const circle = new Circle('<svg viewBox ="0 0 300 200">', circleSVG)
+  var data = `${circle.window}${circle.text}`
+  console.log("DATA: " +data)   
 
- if (data.shapetype=='Triangle'){}
+ }else if (data.shapetype=='Triangle'){  const triangleSVG = `<polygon points="150,30 50,170 250,170" fill="${data.shapecolor}"/>
+ <text x="135" y="120" fill="${data.textcolor}">${data.text}</text></svg>` ;
+ const triangle = new Triangle('<svg viewBox ="0 0 300 200">', triangleSVG)
+ var data = `${triangle.window}${triangle.text}`
+ console.log("DATA: " +data) }
+   
 
-
-    // var data = `data${rectangle}`
-    console.log(data)
 
    fs.writeFile('./dir/logo.svg', data, (err) => {
       if (err) {
