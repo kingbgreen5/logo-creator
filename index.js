@@ -1,4 +1,4 @@
-const Shape = require('./lib/shapes');
+
 const inquirer = require('inquirer');
 const fs = require ('fs')
 const Rectangle = require('./lib/shapes')
