@@ -4,6 +4,7 @@ const fs = require ('fs')
 const Rectangle = require('./lib/shapes')
 const Circle = require('./lib/shapes')
 const Triangle = require('./lib/shapes')
+const window = '<svg xmlns="http://www.w3.org/2000/svg" viewBox ="0 0 300 200">'
 
 // TODO: Create an array of questions for user input
 const questions = ['Enter up to three characters for logo text.','Please enter text color keyword or hex value', 'Enter desired logo shape ', 'Enter shape color keyword'];
@@ -57,30 +58,27 @@ function writeToFile(fileName, data) {
  if (data.shapetype =='Rectangle'){
   const rectSVG = `<rect x="100" y="50" width="100px" height="100px" fill="${data.shapecolor}"/>
   <text x="135" y="100" fill="${data.textcolor}">${data.text}</text></svg>` ;
-  const rectangle = new Rectangle('<svg viewBox ="0 0 300 200">', rectSVG)
+  const rectangle = new Rectangle('<svg xmlns="http://www.w3.org/2000/svg" viewBox ="0 0 300 200">', rectSVG)
   var data = `${rectangle.window}${rectangle.text}`
   console.log("DATA: " +data)    
 
 }else if (data.shapetype=='Circle'){
   const circleSVG = `<circle cx="150" cy="100" r="40" fill="${data.shapecolor}"/>
   <text x="135" y="100" fill="${data.textcolor}">${data.text}</text></svg>` ;
-  const circle = new Circle('<svg viewBox ="0 0 300 200">', circleSVG)
+  const circle = new Circle('<svg xmlns="http://www.w3.org/2000/svg" viewBox ="0 0 300 200">', circleSVG)
   var data = `${circle.window}${circle.text}`
   console.log("DATA: " +data)   
 
- }else if (data.shapetype=='Triangle'){  const triangleSVG = `<polygon points="150,30 50,170 250,170" fill="${data.shapecolor}"/>
- <text x="135" y="120" fill="${data.textcolor}">${data.text}</text></svg>` ;
- const triangle = new Triangle('<svg viewBox ="0 0 300 200">', triangleSVG)
- var data = `${triangle.window}${triangle.text}`
- console.log("DATA: " +data) }
+ }else if (data.shapetype=='Triangle'){ 
+ const triangle = new Triangle(window,data.text,data.textcolor,data.shapecolor)
+ var data = triangle.render()
+ console.log("DATA LOGGED: " + data) }
    
-
-
    fs.writeFile('./dir/logo.svg', data, (err) => {
       if (err) {
         console.error(err);
       }else{
-        console.log("sucess!")
+        console.log("Sucess!")
       }
     });
 }
