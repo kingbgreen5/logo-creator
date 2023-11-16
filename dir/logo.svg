@@ -1,1 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox ="0 0 300 200"><circle cx="150" cy="100"  r="40" fill="red"/> <text x="138" y="100" fill="BLack">RED</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox ="0 0 300 200"><rect x="100" y="50" width="100px" height="100px" fill="Green"/><text x="135" y="100" fill="White">NPM</text></svg>
