@@ -44,17 +44,16 @@ function init() {                                           // Initialize
     ])
     .then((response) =>{ // user answers stored in response
 
-      writeToFile('./dir/logo.svg', response)
+      writeToFile('./dir/logo.svg', response)                         //calls write to file
     });
 }
 
 
 
-function writeToFile(fileName, data) {                            // write to file, if shapetype is one of three shapes, runs that code
-
+function writeToFile(fileName, data) {                            // write to file function, if shapetype is one of three shapes, runs that code
 
  if (data.shapetype =='Rectangle'){
-  const rectangle = new Rectangle(window,data.text,data.textcolor,data.shapecolor)        // constructs a rectangle
+  const rectangle = new Rectangle(window,data.text,data.textcolor,data.shapecolor)        
   var data = rectangle.renderRectangle()     
 
 }else if (data.shapetype=='Circle'){
